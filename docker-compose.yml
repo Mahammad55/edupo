@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  custom-postgres:
+    hostname: postgres
+    image: postgres
+    container_name: edupo-app
+    restart: always
+    ports:
+      - '5430:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=edupo_db
+    networks:
+      - my_network
+    volumes:
+      - bank-db:/var/lib/postgresql/data
+
+volumes:
+  bank-db:
+
+networks:
+  my_network:
