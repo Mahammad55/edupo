@@ -1,4 +1,4 @@
-package az.gigroup.edupo.dto;
+package az.gigroup.edupo.dto.response;
 
 public class CustomerResponse {
 }

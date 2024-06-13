@@ -1,2 +1,4 @@
-package az.gigroup.edupo.controller;public class CustomerController {
+package az.gigroup.edupo.controller;
+
+public class CustomerController {
 }

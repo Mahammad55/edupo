@@ -1,2 +1,4 @@
-package az.gigroup.edupo.controller;public class CourseRepository {
+package az.gigroup.edupo.repository;
+
+public interface CourseRepository {
 }

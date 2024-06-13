@@ -1,2 +1,4 @@
-package az.gigroup.edupo.repository;public class CustomerRepository {
+package az.gigroup.edupo.repository;
+
+public interface CustomerRepository {
 }

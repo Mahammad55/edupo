@@ -1,2 +1,4 @@
-package az.gigroup.edupo.service;public class CustomerService {
+package az.gigroup.edupo.service;
+
+public interface CustomerService {
 }

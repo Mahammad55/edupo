@@ -1,2 +1,4 @@
-package az.gigroup.edupo.entity;public class Course {
+package az.gigroup.edupo.entity;
+
+public class Course {
 }
