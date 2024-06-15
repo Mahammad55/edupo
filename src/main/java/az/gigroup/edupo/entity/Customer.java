@@ -2,17 +2,13 @@ package az.gigroup.edupo.entity;
 
 import az.gigroup.edupo.enums.GenderType;
 import az.gigroup.edupo.enums.Status;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Table(name = "customers")
@@ -26,11 +22,7 @@ public class Customer {
     private Long id;
 
     private String name;
-
-    // Stages (lead, contacted, qualified, postponed, won, lost)
-
     private String mobileNumber;
-
     private String email;
 
     @Enumerated(EnumType.STRING)
@@ -39,10 +31,12 @@ public class Customer {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    // Products (Course list)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Course> courseList;
 
-    // Probability
-    // Next step (Follow up and retarget later)
-    // Admin (User name)
-    // Price
+    private int probability;
+    private String nextStep;
+    private String admin;
+
+    private double price;
 }
