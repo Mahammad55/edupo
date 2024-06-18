@@ -1,18 +1,8 @@
 package az.gigroup.edupo.entity;
 
 import az.gigroup.edupo.enums.GenderType;
-import az.gigroup.edupo.enums.Stages;
 import az.gigroup.edupo.enums.Status;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,12 +22,7 @@ public class Customer {
     private Long id;
 
     private String name;
-
-    @Enumerated(EnumType.STRING)
-    private Stages stages;
-
     private String mobileNumber;
-
     private String email;
 
     @Enumerated(EnumType.STRING)
@@ -46,9 +31,13 @@ public class Customer {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @ManyToMany
-    @JoinTable(name = "customer_courses",
-            joinColumns = @JoinColumn(name = "customer_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"))
-    private List<Course> courses;
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Course> courseList;
+
+    private int probability;
+    private String nextStep;
+    private String admin;
+
+    private double price;
 }
+

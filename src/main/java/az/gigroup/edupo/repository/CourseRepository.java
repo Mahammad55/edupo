@@ -1,4 +1,8 @@
+
 package az.gigroup.edupo.repository;
 
-public interface CourseRepository {
+import az.gigroup.edupo.entity.Course;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CourseRepository extends JpaRepository<Course, Long> {
 }
