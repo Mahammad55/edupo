@@ -1,7 +1,6 @@
 package az.gigroup.edupo.controller;
 
 import az.gigroup.edupo.dto.response.UserDto;
-import az.gigroup.edupo.entity.User;
 import az.gigroup.edupo.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,8 +21,8 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @GetMapping
-    public UserDto getUserById(Long userId){
+    @GetMapping("/{userId}")
+    public UserDto getUserById(@PathVariable Long userId){
         return userService.getUserById(userId);
     }
 

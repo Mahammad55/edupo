@@ -6,6 +6,7 @@ import az.gigroup.edupo.mapper.UserMapper;
 import az.gigroup.edupo.repository.UserRepository;
 import az.gigroup.edupo.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public List<UserDto> getAllUsers() {
@@ -33,6 +35,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(UserDto userDto) {
+        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
         User user = userMapper.mapToEntity(userDto);
         userRepository.save(user);
     }

@@ -31,7 +31,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
         if(!users.isEmpty()){
             User user = users.get(0);
-            boolean isEqual = passwordEncoder.matches(user.getPassword(),password);
+            boolean isEqual = passwordEncoder.matches(password,user.getPassword());
             if(isEqual){
                 List<GrantedAuthority> authorities = new ArrayList<>();
                 authorities.add(new SimpleGrantedAuthority(user.getRole().toString()));
