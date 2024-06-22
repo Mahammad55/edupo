@@ -9,9 +9,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CustomerResponse {
-
     private Customer customer;
-    private double totalPrice;
 
+    private double totalPrice;
 }
 
