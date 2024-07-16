@@ -3,6 +3,7 @@ package az.gigroup.edupo.controller;
 import az.gigroup.edupo.dto.response.CustomerResponse;
 import az.gigroup.edupo.entity.Customer;
 import az.gigroup.edupo.service.CustomerService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,6 +21,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/customers")
+@Tag(name = "Customer Controller")
 @RequiredArgsConstructor
 public class CustomerController {
     private final CustomerService customerService;

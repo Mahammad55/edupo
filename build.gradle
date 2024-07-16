@@ -28,11 +28,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-//    implementation 'org.liquibase:liquibase-core'
-    annotationProcessor 'org.projectlombok:lombok:1.18.32'
-    compileOnly 'org.projectlombok:lombok:1.18.32'
-    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${openApiVersion}"
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    compileOnly 'org.projectlombok:lombok:1.18.32'
+    annotationProcessor 'org.projectlombok:lombok:1.18.32'
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'org.postgresql:postgresql'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

@@ -2,6 +2,7 @@ package az.gigroup.edupo.controller;
 
 import az.gigroup.edupo.dto.response.UserDto;
 import az.gigroup.edupo.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/users")
+@Tag(name = "User Controller")
 @RequiredArgsConstructor
 public class UserController {
 
