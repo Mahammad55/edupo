@@ -12,13 +12,10 @@ public interface CustomerService {
 
     CustomerResponse getCustomerById(Long id);
 
-//    Customer updateCustomer(Long id, Customer updatedCustomer);
-//
+    CustomerResponse updateCustomer(Long id, CustomerRequest customerRequest);
+
 //    void deleteCustomer(Long id);
-//
+
 //    List<Customer> findCustomersByName(String name);
-//
-//    double calculateTotalPrice(Customer customer);
-//
-//    CustomerResponse createCustomerResponse(CustomerRequest customerRequest);
+
 }

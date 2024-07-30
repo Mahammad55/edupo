@@ -34,13 +34,11 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.getCustomerById(id));
     }
 
-//
-//    @PutMapping("/{id}")
-//    public ResponseEntity<Customer> updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
-//        Customer updatedCustomer = customerService.updateCustomer(id, customer);
-//        return ResponseEntity.ok(updatedCustomer);
-//    }
-//
+    @PutMapping("/{id}")
+    public ResponseEntity<CustomerResponse> updateCustomer(@PathVariable Long id, @RequestBody CustomerRequest customerRequest) {
+        return ResponseEntity.ok(customerService.updateCustomer(id, customerRequest));
+    }
+
 //    @DeleteMapping("/{id}")
 //    public ResponseEntity<Void> deleteCustomer(@PathVariable Long id) {
 //        customerService.deleteCustomer(id);

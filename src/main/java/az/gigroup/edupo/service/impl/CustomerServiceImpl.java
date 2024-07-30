@@ -35,8 +35,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         Customer customer = customerMapper.requestToEntity(customerRequest);
         customer.setCourses(List.of(course));
-        customerRepository.save(customer);
-        return customerMapper.entityToResponse(customer);
+        return customerMapper.entityToResponse(customerRepository.save(customer));
     }
 
     @Override
@@ -46,50 +45,24 @@ public class CustomerServiceImpl implements CustomerService {
                 .toList();
     }
 
+    @Override
+    public CustomerResponse getCustomerById(Long id) {
+        return customerRepository.findById(id)
+                .map(customerMapper::entityToResponse)
+                .orElseThrow(() -> new NotFoundException("Customer by id=%d not found".formatted(id)));
+    }
 
-//    public double calculateTotalPrice(Customer customer) {
-//        return customer.getCourseList().stream()
-//                .mapToDouble(course -> course.getPrice())
-//                .sum();
-//    }
-//
-//    public CustomerResponse createCustomerResponse(CustomerRequest customerRequest) {
-//        Customer createdCustomer = createCustomer(customer);
-//        double totalPrice = calculateTotalPrice(createdCustomer);
-//        return new CustomerResponse(createdCustomer, totalPrice);
-//    }
-//    @Override
-//    public Optional<Customer> getCustomerById(Long id) {
-//        return Optional.ofNullable(customerRepository.findById(id)
-//                .orElseThrow(() -> new CustomerNotFoundException(id)));
-//    }
-//
-//    @Override
-//    public List<Customer> getAllCustomers() {
-//        return customerRepository.findAll();
-//    }
-//
-//    @Override
-//    public Customer updateCustomer(Long id, Customer updatedCustomer) {
-//        return customerRepository.findById(id)
-//                .map(customer -> {
-//                    customer.setName(updatedCustomer.getName());
-//                    customer.setEmail(updatedCustomer.getEmail());
-//                    customer.setMobileNumber(updatedCustomer.getMobileNumber());
-//                    return customerRepository.save(customer);
-//                }).orElseThrow(() -> new CustomerNotFoundException(id));
-//    }
-//
-//    @Override
-//    public void deleteCustomer(Long id) {
-//        if (!customerRepository.existsById(id)) {
-//            throw new CustomerNotFoundException(id);
-//        }
-//        customerRepository.deleteById(id);
-//    }
-//
-//    @Override
-//    public List<Customer> findCustomersByName(String name) {
-//        return customerRepository.findByName(name);
-//    }
+    @Override
+    public CustomerResponse updateCustomer(Long id, CustomerRequest customerRequest) {
+        customerRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Customer by id=%d not found".formatted(id)));
+
+        Course course = courseRepository.findById(customerRequest.getCourseId())
+                .orElseThrow(() -> new NotFoundException("Course by id=%d not found".formatted(customerRequest.getCourseId())));
+
+        Customer customer = customerMapper.requestToEntity(customerRequest);
+        customer.setId(id);
+        customer.setCourses(List.of(course));
+        return customerMapper.entityToResponse(customerRepository.save(customer));
+    }
 }
