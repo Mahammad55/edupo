@@ -65,4 +65,12 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setCourses(List.of(course));
         return customerMapper.entityToResponse(customerRepository.save(customer));
     }
+
+    @Override
+    public void deleteCustomer(Long id) {
+        customerRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Customer by id=%d not found".formatted(id)));
+
+        customerRepository.deleteById(id);
+    }
 }

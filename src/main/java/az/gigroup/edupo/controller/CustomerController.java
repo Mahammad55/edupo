@@ -39,11 +39,11 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.updateCustomer(id, customerRequest));
     }
 
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Void> deleteCustomer(@PathVariable Long id) {
-//        customerService.deleteCustomer(id);
-//        return ResponseEntity.noContent().build();
-//    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCustomer(@PathVariable Long id) {
+        customerService.deleteCustomer(id);
+        return ResponseEntity.noContent().build();
+    }
 //
 //    @GetMapping("/search")
 //    public ResponseEntity<List<Customer>> findCustomersByName(@RequestParam String name) {
