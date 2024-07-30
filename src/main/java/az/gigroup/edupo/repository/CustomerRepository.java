@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
+    @EntityGraph(attributePaths = "courses")
     List<Customer> findByName(String name);
 
     boolean existsCustomerByEmail(String email);

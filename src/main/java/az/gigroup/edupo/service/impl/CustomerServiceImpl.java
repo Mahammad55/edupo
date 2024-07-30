@@ -73,4 +73,13 @@ public class CustomerServiceImpl implements CustomerService {
 
         customerRepository.deleteById(id);
     }
+
+    @Override
+    public List<CustomerResponse> getCustomerByName(String name) {
+        List<Customer> customerList = customerRepository.findByName(name);
+
+        if (customerList.isEmpty()) throw new NotFoundException("Customer by name=%s not found".formatted(name));
+
+        return customerList.stream().map(customerMapper::entityToResponse).toList();
+    }
 }

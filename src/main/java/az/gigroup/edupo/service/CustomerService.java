@@ -16,8 +16,5 @@ public interface CustomerService {
 
     void deleteCustomer(Long id);
 
-//    void deleteCustomer(Long id);
-
-//    List<Customer> findCustomersByName(String name);
-
+    List<CustomerResponse> getCustomerByName(String name);
 }

@@ -44,10 +44,9 @@ public class CustomerController {
         customerService.deleteCustomer(id);
         return ResponseEntity.noContent().build();
     }
-//
-//    @GetMapping("/search")
-//    public ResponseEntity<List<Customer>> findCustomersByName(@RequestParam String name) {
-//        List<Customer> customers = customerService.findCustomersByName(name);
-//        return ResponseEntity.ok(customers);
-//    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<CustomerResponse>> getCustomerByName(@RequestParam String name) {
+        return ResponseEntity.ok(customerService.getCustomerByName(name));
+    }
 }
