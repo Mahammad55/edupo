@@ -1,4 +1,4 @@
-package az.gigroup.edupo.dto.response;
+package az.gigroup.edupo.dto.request;
 
 import az.gigroup.edupo.enums.GenderType;
 import az.gigroup.edupo.enums.Stages;
@@ -7,15 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerResponse {
-    private Long id;
-
+public class CustomerRequest {
     private String name;
 
     private Stages stages;
@@ -28,11 +23,5 @@ public class CustomerResponse {
 
     private Status status;
 
-    private List<CourseResponse> courses;
-
-    private long probability;
-
-    private String nextStep;
-
-    private BigDecimal price;
+    private Long courseId;
 }

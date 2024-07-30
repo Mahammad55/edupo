@@ -15,10 +15,10 @@ services:
     networks:
       - my_network
     volumes:
-      - bank-db:/var/lib/postgresql/data
+      - postgres-db:/var/lib/postgresql/data
 
 volumes:
-  bank-db:
+  postgres-db:
 
 networks:
   my_network:
