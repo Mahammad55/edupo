@@ -1,13 +1,13 @@
 package az.gigroup.edupo.dto.response;
 
 import az.gigroup.edupo.enums.GenderType;
+import az.gigroup.edupo.enums.NextStep;
 import az.gigroup.edupo.enums.Stages;
 import az.gigroup.edupo.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -32,7 +32,7 @@ public class CustomerResponse {
 
     private long probability;
 
-    private String nextStep;
+    private NextStep nextStep;
 
-    private BigDecimal price;
+    private double price;
 }

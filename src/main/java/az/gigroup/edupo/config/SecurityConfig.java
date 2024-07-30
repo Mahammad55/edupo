@@ -37,10 +37,10 @@ public class SecurityConfig {
 
         httpSecurity.authorizeHttpRequests(auth -> auth
                         .requestMatchers(AUTH_WHITELIST).permitAll()
-                        .requestMatchers(HttpMethod.GET, "api/v1/customers").hasAnyAuthority(ADMIN.name())
-                        .requestMatchers(HttpMethod.GET, "api/v1/customers").hasAnyAuthority(ADMIN.name())
-                        .requestMatchers(HttpMethod.POST, "api/v1/customers").permitAll()
-                        .requestMatchers(HttpMethod.POST, "api/v1/users").permitAll()
+//                        .requestMatchers(HttpMethod.GET, "api/v1/customers").hasAnyAuthority(ADMIN.name())
+//                        .requestMatchers(HttpMethod.GET, "api/v1/customers").hasAnyAuthority(ADMIN.name())
+//                        .requestMatchers(HttpMethod.POST, "api/v1/customers").permitAll()
+                        .requestMatchers("api/v1/**").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(Customizer.withDefaults());
 

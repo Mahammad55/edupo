@@ -1,7 +1,7 @@
 package az.gigroup.edupo.service.impl;
 
 import az.gigroup.edupo.entity.User;
-import az.gigroup.edupo.exception.UserNotFoundException;
+import az.gigroup.edupo.exception.NotFoundException;
 import az.gigroup.edupo.repository.UserRepository;
 import az.gigroup.edupo.security.MyUserDetails;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User user = userRepository.findUserByEmail(username)
                 .orElseThrow(() -> {
                             log.error("UserDetailsService.loadUserByUsername.error -- user not found email:{}", username);
-                            return new UserNotFoundException(username);
+                            return new NotFoundException("User by username=%s not found".formatted(username));
                         }
                 );
 
