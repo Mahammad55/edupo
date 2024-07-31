@@ -4,6 +4,7 @@ import az.gigroup.edupo.dto.request.UserRequest;
 import az.gigroup.edupo.dto.response.UserResponse;
 import az.gigroup.edupo.entity.Authority;
 import az.gigroup.edupo.entity.User;
+import az.gigroup.edupo.exception.AlreadyExistsException;
 import az.gigroup.edupo.exception.NotFoundException;
 import az.gigroup.edupo.mapper.UserMapper;
 import az.gigroup.edupo.repository.AuthorityRepository;
@@ -43,6 +44,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse createUser(UserRequest userRequest) {
+        if (userRepository.findUserByEmail(userRequest.getEmail()).isPresent()) {
+            throw new AlreadyExistsException("User by email=%s already exist".formatted(userRequest.getEmail()));
+        }
+
         User user = userMapper.requestToEntity(userRequest);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         Authority authority = authorityRepository.findAuthoritiesByAuthority(userRequest.getRole().name()).orElseGet(() -> authorityRepository.save(new Authority().authority(userRequest.getRole().name())));
@@ -52,6 +57,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(Long id, UserRequest userRequest) {
+        userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("User by id=%d not found".formatted(id)));
+
         User user = userMapper.requestToEntity(userRequest);
         user.setId(id);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -60,9 +68,11 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-//
-//    @Override
-//    public void deleteUser(Long userId) {
-//        userRepository.deleteById(userId);
-//    }
+    @Override
+    public void deleteUser(Long id) {
+        userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("User by id=%d not found".formatted(id)));
+
+        userRepository.deleteById(id);
+    }
 }
