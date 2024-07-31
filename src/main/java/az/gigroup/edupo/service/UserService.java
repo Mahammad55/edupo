@@ -1,14 +1,15 @@
 package az.gigroup.edupo.service;
 
-import az.gigroup.edupo.dto.response.UserDto;
+import az.gigroup.edupo.dto.response.UserResponse;
 
 import java.util.List;
 
 public interface UserService {
+    List<UserResponse> getAllUser();
 
-    public List<UserDto> getAllUsers();
-    public UserDto getUserById(Long userId);
-    public void addUser(UserDto userDto);
-    public void updateUser(Long userId, UserDto userDto);
-    public void deleteUser(Long userId);
+
+//    public UserResponse getUserById(Long userId);
+//    public void addUser(UserResponse userResponse);
+//    public void updateUser(Long userId, UserResponse userResponse);
+//    public void deleteUser(Long userId);
 }

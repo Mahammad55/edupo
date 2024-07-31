@@ -1,12 +1,13 @@
 package az.gigroup.edupo.controller;
 
-import az.gigroup.edupo.dto.response.UserDto;
+import az.gigroup.edupo.dto.response.UserResponse;
 import az.gigroup.edupo.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -15,32 +16,31 @@ import java.util.List;
 @Tag(name = "User Controller")
 @RequiredArgsConstructor
 public class UserController {
-
     private final UserService userService;
 
     @GetMapping
-    public List<UserDto> getAllUsers(){
-        return userService.getAllUsers();
+    public ResponseEntity<List<UserResponse>> getAllUser() {
+        return ResponseEntity.ok(userService.getAllUser());
     }
 
-    @GetMapping("/{userId}")
-    public UserDto getUserById(@PathVariable Long userId){
-        return userService.getUserById(userId);
-    }
-
-    @PostMapping
-    public ResponseEntity<?> addUser(@RequestBody UserDto userDto){
-        userService.addUser(userDto);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
-
-    @PutMapping("/{userId}")
-    public void updateUser(@PathVariable Long userId, UserDto userDto){
-        userService.updateUser(userId,userDto);
-    }
-
-    @DeleteMapping("/{userId}")
-    public void deleteUser(@PathVariable Long userId){
-        userService.deleteUser(userId);
-    }
+//    @GetMapping("/{userId}")
+//    public UserResponse getUserById(@PathVariable Long userId) {
+//        return userService.getUserById(userId);
+//    }
+//
+//    @PostMapping
+//    public ResponseEntity<?> addUser(@RequestBody UserResponse userResponse) {
+//        userService.addUser(userResponse);
+//        return ResponseEntity.status(HttpStatus.CREATED).build();
+//    }
+//
+//    @PutMapping("/{userId}")
+//    public void updateUser(@PathVariable Long userId, UserResponse userResponse) {
+//        userService.updateUser(userId, userResponse);
+//    }
+//
+//    @DeleteMapping("/{userId}")
+//    public void deleteUser(@PathVariable Long userId) {
+//        userService.deleteUser(userId);
+//    }
 }
