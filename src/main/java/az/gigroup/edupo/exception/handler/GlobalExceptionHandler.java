@@ -3,6 +3,7 @@ package az.gigroup.edupo.exception.handler;
 import az.gigroup.edupo.dto.response.ErrorResponse;
 import az.gigroup.edupo.exception.AlreadyExistsException;
 import az.gigroup.edupo.exception.NotFoundException;
+import az.gigroup.edupo.exception.UnauthorizedException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -31,6 +32,17 @@ public class GlobalExceptionHandler {
         return ErrorResponse.builder()
                 .timestamp(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MMMM-dd HH:mm:ss")))
                 .status(HttpStatus.NOT_FOUND.value())
+                .message(exception.getMessage())
+                .path(request.getRequestURI())
+                .build();
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ErrorResponse unauthorizedExceptionHandler(UnauthorizedException exception, HttpServletRequest request) {
+        return ErrorResponse.builder()
+                .timestamp(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MMMM-dd HH:mm:ss")))
+                .status(HttpStatus.UNAUTHORIZED.value())
                 .message(exception.getMessage())
                 .path(request.getRequestURI())
                 .build();
