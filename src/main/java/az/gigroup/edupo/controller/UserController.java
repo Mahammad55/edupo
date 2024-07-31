@@ -1,15 +1,16 @@
 package az.gigroup.edupo.controller;
 
+import az.gigroup.edupo.dto.request.UserRequest;
 import az.gigroup.edupo.dto.response.UserResponse;
 import az.gigroup.edupo.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -23,16 +24,15 @@ public class UserController {
         return ResponseEntity.ok(userService.getAllUser());
     }
 
-//    @GetMapping("/{userId}")
-//    public UserResponse getUserById(@PathVariable Long userId) {
-//        return userService.getUserById(userId);
-//    }
-//
-//    @PostMapping
-//    public ResponseEntity<?> addUser(@RequestBody UserResponse userResponse) {
-//        userService.addUser(userResponse);
-//        return ResponseEntity.status(HttpStatus.CREATED).build();
-//    }
+    @GetMapping("/{id}")
+    public ResponseEntity<UserResponse> getUserById(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.getUserById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest userRequest) {
+        return ResponseEntity.status(CREATED).body(userService.createUser(userRequest));
+    }
 //
 //    @PutMapping("/{userId}")
 //    public void updateUser(@PathVariable Long userId, UserResponse userResponse) {

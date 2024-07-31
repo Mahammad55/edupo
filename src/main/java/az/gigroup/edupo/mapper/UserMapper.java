@@ -1,5 +1,6 @@
 package az.gigroup.edupo.mapper;
 
+import az.gigroup.edupo.dto.request.UserRequest;
 import az.gigroup.edupo.dto.response.UserResponse;
 import az.gigroup.edupo.entity.Authority;
 import az.gigroup.edupo.entity.User;
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
-    User requestToEntity(UserResponse userResponse);
+    User requestToEntity(UserRequest userRequest);
 
     @Mapping(target = "jobPosition", source = "authorities", qualifiedByName = "setJobPosition")
     UserResponse entityToResponse(User user);
