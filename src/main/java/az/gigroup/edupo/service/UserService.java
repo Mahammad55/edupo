@@ -12,6 +12,8 @@ public interface UserService {
 
     UserResponse createUser(UserRequest userRequest);
 
+    void updateUser(Long id, UserRequest userRequest);
+
 
 //    public UserResponse getUserById(Long userId);
 //    public void addUser(UserResponse userResponse);

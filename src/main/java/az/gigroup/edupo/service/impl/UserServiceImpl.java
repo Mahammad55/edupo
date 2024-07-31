@@ -50,14 +50,16 @@ public class UserServiceImpl implements UserService {
         return userMapper.entityToResponse(userRepository.save(user));
     }
 
-//
-//    @Override
-//    public void updateUser(Long userId, UserResponse userResponse) {
-//        User user = userRepository.findById(userId).orElseThrow();
-//        user.setEmail(userResponse.getEmail());
-////        user.setRole(userDto.getRole());
-//        userRepository.save(user);
-//    }
+    @Override
+    public void updateUser(Long id, UserRequest userRequest) {
+        User user = userMapper.requestToEntity(userRequest);
+        user.setId(id);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        Authority authority = authorityRepository.findAuthoritiesByAuthority(userRequest.getRole().name()).orElseGet(() -> authorityRepository.save(new Authority().authority(userRequest.getRole().name())));
+        user.setAuthorities(Set.of(authority));
+        userRepository.save(user);
+    }
+
 //
 //    @Override
 //    public void deleteUser(Long userId) {

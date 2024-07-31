@@ -33,11 +33,12 @@ public class UserController {
     public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest userRequest) {
         return ResponseEntity.status(CREATED).body(userService.createUser(userRequest));
     }
-//
-//    @PutMapping("/{userId}")
-//    public void updateUser(@PathVariable Long userId, UserResponse userResponse) {
-//        userService.updateUser(userId, userResponse);
-//    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateUser(@PathVariable Long id, @RequestBody UserRequest userRequest) {
+        userService.updateUser(id, userRequest);
+        return ResponseEntity.noContent().build();
+    }
 //
 //    @DeleteMapping("/{userId}")
 //    public void deleteUser(@PathVariable Long userId) {
