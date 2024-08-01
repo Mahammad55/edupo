@@ -1,5 +1,6 @@
 package az.gigroup.edupo.config;
 
+import az.gigroup.edupo.security.JwtAuthEntryPoint;
 import az.gigroup.edupo.security.JwtAuthFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +29,8 @@ public class SecurityConfig {
 
     private final JwtAuthFilter jwtAuthFilter;
 
+    private final JwtAuthEntryPoint jwtAuthEntryPoint;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
@@ -37,14 +40,13 @@ public class SecurityConfig {
         httpSecurity.authorizeHttpRequests(auth -> auth
                         .requestMatchers(AUTH_WHITELIST).permitAll()
                         .requestMatchers("api/v1/customers/**").hasAnyAuthority(SUPER_ADMIN.name())
-//                        .requestMatchers(HttpMethod.GET, "api/v1/customers").hasAnyAuthority(ADMIN.name())
-//                        .requestMatchers(HttpMethod.POST, "api/v1/customers").permitAll()
                         .requestMatchers("api/v1/**").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(Customizer.withDefaults());
 
         httpSecurity.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-        httpSecurity.httpBasic(Customizer.withDefaults());
+        httpSecurity.httpBasic(basic -> basic.authenticationEntryPoint(jwtAuthEntryPoint));
+        httpSecurity.exceptionHandling(Customizer.withDefaults());
         return httpSecurity.build();
     }
 
