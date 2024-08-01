@@ -6,6 +6,7 @@ import az.gigroup.edupo.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,12 +31,12 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest userRequest) {
+    public ResponseEntity<UserResponse> createUser(@Validated @RequestBody UserRequest userRequest) {
         return ResponseEntity.status(CREATED).body(userService.createUser(userRequest));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateUser(@PathVariable Long id, @RequestBody UserRequest userRequest) {
+    public ResponseEntity<Void> updateUser(@PathVariable Long id, @Validated @RequestBody UserRequest userRequest) {
         userService.updateUser(id, userRequest);
         return ResponseEntity.noContent().build();
     }
