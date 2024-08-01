@@ -6,6 +6,7 @@ import az.gigroup.edupo.service.CustomerService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @PostMapping
-    public ResponseEntity<CustomerResponse> createCustomer(@RequestBody CustomerRequest customerRequest) {
+    public ResponseEntity<CustomerResponse> createCustomer(@Validated @RequestBody CustomerRequest customerRequest) {
         return ResponseEntity.status(CREATED).body(customerService.createCustomer(customerRequest));
     }
 
@@ -35,7 +36,7 @@ public class CustomerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CustomerResponse> updateCustomer(@PathVariable Long id, @RequestBody CustomerRequest customerRequest) {
+    public ResponseEntity<CustomerResponse> updateCustomer(@PathVariable Long id, @Validated @RequestBody CustomerRequest customerRequest) {
         return ResponseEntity.ok(customerService.updateCustomer(id, customerRequest));
     }
 

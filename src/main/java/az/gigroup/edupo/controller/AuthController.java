@@ -1,6 +1,7 @@
 package az.gigroup.edupo.controller;
 
 import az.gigroup.edupo.dto.request.LoginRequest;
+import az.gigroup.edupo.dto.response.LoginResponse;
 import az.gigroup.edupo.service.AuthService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
         return ResponseEntity.ok(authService.login(loginRequest));
     }
 
