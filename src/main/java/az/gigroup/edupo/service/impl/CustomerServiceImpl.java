@@ -15,6 +15,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static az.gigroup.edupo.enums.Active.ACTIVE;
+import static az.gigroup.edupo.enums.Active.DEACTIVE;
+
 @Service
 @RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
@@ -26,7 +29,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerResponse createCustomer(CustomerRequest customerRequest) {
-        if (customerRepository.existsCustomerByEmail(customerRequest.getEmail())) {
+        if (customerRepository.existsCustomerByEmailAndActive(customerRequest.getEmail(), ACTIVE.value)) {
             throw new AlreadyExistsException("Customer by email=%s already exist".formatted(customerRequest.getEmail()));
         }
 
@@ -40,21 +43,21 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<CustomerResponse> getAllCustomer() {
-        return customerRepository.findAll().stream()
+        return customerRepository.findAllByActive(ACTIVE.value).stream()
                 .map(customerMapper::entityToResponse)
                 .toList();
     }
 
     @Override
     public CustomerResponse getCustomerById(Long id) {
-        return customerRepository.findById(id)
+        return customerRepository.findByIdAndActive(id, ACTIVE.value)
                 .map(customerMapper::entityToResponse)
                 .orElseThrow(() -> new NotFoundException("Customer by id=%d not found".formatted(id)));
     }
 
     @Override
     public CustomerResponse updateCustomer(Long id, CustomerRequest customerRequest) {
-        customerRepository.findById(id)
+        customerRepository.findByIdAndActive(id, ACTIVE.value)
                 .orElseThrow(() -> new NotFoundException("Customer by id=%d not found".formatted(id)));
 
         Course course = courseRepository.findById(customerRequest.getCourseId())
@@ -63,20 +66,20 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = customerMapper.requestToEntity(customerRequest);
         customer.setId(id);
         customer.setCourse(course);
+        customer.setActive(ACTIVE.value);
         return customerMapper.entityToResponse(customerRepository.save(customer));
     }
 
     @Override
     public void deleteCustomer(Long id) {
-        customerRepository.findById(id)
+        Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Customer by id=%d not found".formatted(id)));
-
-        customerRepository.deleteById(id);
+        customer.setActive(DEACTIVE.value);
     }
 
     @Override
     public List<CustomerResponse> getCustomerByName(String name) {
-        List<Customer> customerList = customerRepository.findByName(name);
+        List<Customer> customerList = customerRepository.findByNameAndActive(name, ACTIVE.value);
 
         if (customerList.isEmpty()) throw new NotFoundException("Customer by name=%s not found".formatted(name));
 

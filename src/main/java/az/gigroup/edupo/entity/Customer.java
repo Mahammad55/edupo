@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import static az.gigroup.edupo.enums.Active.ACTIVE;
+
 @Entity
 @Table(name = "customers")
 @Getter
@@ -37,5 +39,12 @@ public class Customer {
 
     @ManyToOne
     private Course course;
+
+    private Integer active;
+
+    @PrePersist
+    public void setActiveStatusOnSave() {
+        active = ACTIVE.value;
+    }
 }
 
