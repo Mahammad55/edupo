@@ -10,8 +10,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
-import java.util.List;
-
 import static az.gigroup.edupo.enums.NextStep.FOLLOW_UP;
 import static az.gigroup.edupo.enums.NextStep.RETARGET_LATER;
 
@@ -19,9 +17,10 @@ import static az.gigroup.edupo.enums.NextStep.RETARGET_LATER;
 public interface CustomerMapper {
     Customer requestToEntity(CustomerRequest customerRequest);
 
-    @Mapping(target = "price", source = "courses", qualifiedByName = "setPrice")
+    @Mapping(target = "price", source = "course", qualifiedByName = "setPrice")
     @Mapping(target = "nextStep", source = "stages", qualifiedByName = "setNextStep")
     @Mapping(target = "probability", source = "stages", qualifiedByName = "setProbability")
+    @Mapping(target = "course", source = "course.courseName")
     CustomerResponse entityToResponse(Customer customer);
 
     @Named("setProbability")
@@ -46,7 +45,7 @@ public interface CustomerMapper {
     }
 
     @Named("setPrice")
-    default double setPrice(List<Course> courses) {
-        return courses.stream().mapToDouble(Course::getPrice).sum();
+    default double setPrice(Course courses) {
+        return courses.getPrice();
     }
 }

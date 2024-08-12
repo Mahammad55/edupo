@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "courses")
 @Getter
@@ -20,5 +22,8 @@ public class Course {
     private String courseName;
 
     private double price;
+
+    @OneToMany(mappedBy = "course")
+    private List<Customer> customers;
 }
 

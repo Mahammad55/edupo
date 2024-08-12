@@ -39,7 +39,7 @@ public class SecurityConfig {
 
         httpSecurity.authorizeHttpRequests(auth -> auth
                         .requestMatchers(AUTH_WHITELIST).permitAll()
-                        .requestMatchers("api/v1/customers/**").hasAnyAuthority(SUPER_ADMIN.name())
+//                        .requestMatchers("api/v1/customers/**").hasAnyAuthority(SUPER_ADMIN.name())
                         .requestMatchers("api/v1/**").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(Customizer.withDefaults());

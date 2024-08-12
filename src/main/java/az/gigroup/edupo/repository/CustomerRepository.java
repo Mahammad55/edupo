@@ -1,21 +1,17 @@
 package az.gigroup.edupo.repository;
 
 import az.gigroup.edupo.entity.Customer;
-import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
-    @EntityGraph(attributePaths = "courses")
-    List<Customer> findByName(String name);
+    List<Customer> findByNameAndActive(String name, Integer active);
 
-    boolean existsCustomerByEmail(String email);
+    boolean existsCustomerByEmailAndActive(String email, Integer active);
 
-    @EntityGraph(attributePaths = "courses")
-    List<Customer> findAll();
+    List<Customer> findAllByActive(Integer active);
 
-    @EntityGraph(attributePaths = "courses")
-    Optional<Customer> findById(Long id);
+    Optional<Customer> findByIdAndActive(Long id, Integer active);
 }

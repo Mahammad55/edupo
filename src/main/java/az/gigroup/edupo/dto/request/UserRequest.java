@@ -17,7 +17,7 @@ public class UserRequest {
     @Email(message = "Email address must be valid")
     private String email;
 
-    private GenderType genderType;
+    private GenderType gender;
 
     @ValidPhoneNumber
     private String phone;
