@@ -9,9 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 @Entity
 @Table(name = "customers")
 @Getter
@@ -30,7 +27,7 @@ public class Customer {
     private String email;
 
     @Enumerated(EnumType.STRING)
-    private GenderType genderType;
+    private GenderType gender;
 
     @Enumerated(EnumType.STRING)
     private Status status;
@@ -38,10 +35,7 @@ public class Customer {
     @Enumerated(EnumType.STRING)
     private Stages stages;
 
-    @ManyToMany
-    @JoinTable(name = "customer_courses",
-            joinColumns = @JoinColumn(name = "customer_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"))
-    private List<Course> courses;
+    @ManyToOne
+    private Course course;
 }
 

@@ -27,7 +27,7 @@ public class User {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private GenderType genderType;
+    private GenderType gender;
 
     private String phone;
 

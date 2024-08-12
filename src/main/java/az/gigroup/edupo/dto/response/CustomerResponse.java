@@ -8,8 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,11 +22,11 @@ public class CustomerResponse {
 
     private String email;
 
-    private GenderType genderType;
+    private GenderType gender;
 
     private Status status;
 
-    private List<CourseResponse> courses;
+    private String course;
 
     private long probability;
 

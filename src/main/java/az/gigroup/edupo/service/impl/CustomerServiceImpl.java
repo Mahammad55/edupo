@@ -34,7 +34,7 @@ public class CustomerServiceImpl implements CustomerService {
                 .orElseThrow(() -> new NotFoundException("Course by id=%d not found".formatted(customerRequest.getCourseId())));
 
         Customer customer = customerMapper.requestToEntity(customerRequest);
-        customer.setCourses(List.of(course));
+        customer.setCourse(course);
         return customerMapper.entityToResponse(customerRepository.save(customer));
     }
 
@@ -62,7 +62,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         Customer customer = customerMapper.requestToEntity(customerRequest);
         customer.setId(id);
-        customer.setCourses(List.of(course));
+        customer.setCourse(course);
         return customerMapper.entityToResponse(customerRepository.save(customer));
     }
 

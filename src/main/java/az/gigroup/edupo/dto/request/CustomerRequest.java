@@ -23,7 +23,7 @@ public class CustomerRequest {
     @Email(message = "Email address must be valid")
     private String email;
 
-    private GenderType genderType;
+    private GenderType gender;
 
     private Status status;
 
