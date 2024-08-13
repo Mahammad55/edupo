@@ -2,7 +2,6 @@ package az.gigroup.edupo.mapper;
 
 import az.gigroup.edupo.dto.request.CustomerRequest;
 import az.gigroup.edupo.dto.response.CustomerResponse;
-import az.gigroup.edupo.entity.Course;
 import az.gigroup.edupo.entity.Customer;
 import az.gigroup.edupo.enums.NextStep;
 import az.gigroup.edupo.enums.Stages;
@@ -17,7 +16,7 @@ import static az.gigroup.edupo.enums.NextStep.RETARGET_LATER;
 public interface CustomerMapper {
     Customer requestToEntity(CustomerRequest customerRequest);
 
-    @Mapping(target = "price", source = "course", qualifiedByName = "setPrice")
+    @Mapping(target = "price", source = "course.price")
     @Mapping(target = "nextStep", source = "stages", qualifiedByName = "setNextStep")
     @Mapping(target = "probability", source = "stages", qualifiedByName = "setProbability")
     @Mapping(target = "course", source = "course.courseName")
@@ -27,10 +26,10 @@ public interface CustomerMapper {
     default long setProbability(Stages stages) {
         return switch (stages) {
             case LOST -> 0;
-            case LEAD -> 20;
-            case CONTACTED -> 40;
-            case QUALIFIED -> 65;
-            case POSTPONED -> 85;
+            case LEAD -> 10;
+            case CONTACTED -> 30;
+            case QUALIFIED -> 50;
+            case POSTPONED -> 20;
             case WON -> 100;
         };
     }
@@ -42,10 +41,5 @@ public interface CustomerMapper {
             case POSTPONED -> RETARGET_LATER;
             default -> null;
         };
-    }
-
-    @Named("setPrice")
-    default double setPrice(Course courses) {
-        return courses.getPrice();
     }
 }

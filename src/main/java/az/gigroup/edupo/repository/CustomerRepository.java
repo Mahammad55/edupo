@@ -11,6 +11,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     boolean existsCustomerByEmailAndActive(String email, Integer active);
 
+    boolean existsByEmailAndActiveAndIdNot(String email, Integer active, Long id);
+
     List<Customer> findAllByActive(Integer active);
 
     Optional<Customer> findByIdAndActive(Long id, Integer active);
