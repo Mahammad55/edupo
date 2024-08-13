@@ -70,6 +70,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorResponse exceptionHandler(Exception exception, HttpServletRequest request) {
+        exception.printStackTrace();
         return ErrorResponse.builder()
                 .timestamp(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MMMM-dd HH:mm:ss")))
                 .status(HttpStatus.INTERNAL_SERVER_ERROR.value())

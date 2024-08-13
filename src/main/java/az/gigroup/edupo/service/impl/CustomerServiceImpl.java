@@ -60,6 +60,10 @@ public class CustomerServiceImpl implements CustomerService {
         customerRepository.findByIdAndActive(id, ACTIVE.value)
                 .orElseThrow(() -> new NotFoundException("Customer by id=%d not found".formatted(id)));
 
+        if (customerRepository.existsByEmailAndActiveAndIdNot(customerRequest.getEmail(), ACTIVE.value, id)) {
+            throw new AlreadyExistsException("Customer by email=%s already exist".formatted(customerRequest.getEmail()));
+        }
+
         Course course = courseRepository.findById(customerRequest.getCourseId())
                 .orElseThrow(() -> new NotFoundException("Course by id=%d not found".formatted(customerRequest.getCourseId())));
 
