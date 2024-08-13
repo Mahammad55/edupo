@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -30,6 +31,10 @@ public class User {
     private GenderType gender;
 
     private String phone;
+
+    @OneToMany(mappedBy = "user")
+    private List<Task> tasks;
+
 
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "user_authorities",
