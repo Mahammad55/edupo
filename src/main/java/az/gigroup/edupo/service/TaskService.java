@@ -13,12 +13,7 @@ public interface TaskService {
     void createTask(TaskRequest taskRequest);
 
     List<TaskResponse> getAllTasks(Pageable pageable, TaskCriteriaRequest criteriaRequest);
-//
-//    CustomerResponse getCustomerById(Long id);
-//
+
     void updateTaskStatus(Long id, String status);
-//
-//    void deleteCustomer(Long id);
-//
-//    List<CustomerResponse> getCustomerByName(String name);
+
 }

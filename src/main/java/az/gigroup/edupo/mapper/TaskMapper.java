@@ -28,13 +28,7 @@ public interface TaskMapper {
             task.setTaskType(TaskType.TO_DO_TASK);
         }
     }
-//    @Named("setTaskStatus")
-//    default TaskStatus setTaskStatus(String taskStatus) {
-//        if (taskStatus == null) {
-//            return TaskStatus.OPEN;
-//        }
-//        return TaskStatus.valueOf(taskStatus);
-//    }
+
 
 
     TaskResponse mapToResponse(Task task);

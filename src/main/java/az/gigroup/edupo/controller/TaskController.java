@@ -39,26 +39,11 @@ public class TaskController {
         return ResponseEntity.ok(new PageImpl<>(taskService.getAllTasks(pageable, criteriaRequest)));
     }
 
-    //
-//    @GetMapping("/{id}")
-//    public ResponseEntity<CustomerResponse> getCustomerById(@PathVariable Long id) {
-//        return ResponseEntity.ok(customerService.getCustomerById(id));
-//    }
-//
+
     @PatchMapping("/{id}")
     public ResponseEntity<?> updateCustomer(@PathVariable Long id, @Validated @RequestParam String taskStatus) {
         taskService.updateTaskStatus(id, taskStatus);
         return ResponseEntity.ok("TaskStatus updated successfully!!");
     }
-//
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Void> deleteCustomer(@PathVariable Long id) {
-//        customerService.deleteCustomer(id);
-//        return ResponseEntity.noContent().build();
-//    }
-//
-//    @GetMapping("/search")
-//    public ResponseEntity<List<CustomerResponse>> getCustomerByName(@RequestParam String name) {
-//        return ResponseEntity.ok(customerService.getCustomerByName(name));
-//    }
+
 }

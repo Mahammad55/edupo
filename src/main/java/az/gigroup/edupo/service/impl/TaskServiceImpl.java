@@ -60,44 +60,5 @@ public class TaskServiceImpl implements TaskService {
         task.setStatus(TaskStatus.valueOf(status));
         taskRepository.save(task);
     }
-//
 
-
-//    @Override
-//    public CustomerResponse getCustomerById(Long id) {
-//        return customerRepository.findByIdAndActive(id, ACTIVE.value)
-//                .map(customerMapper::entityToResponse)
-//                .orElseThrow(() -> new NotFoundException("Customer by id=%d not found".formatted(id)));
-//    }
-//
-//    @Override
-//    public CustomerResponse updateCustomer(Long id, CustomerRequest customerRequest) {
-//        customerRepository.findByIdAndActive(id, ACTIVE.value)
-//                .orElseThrow(() -> new NotFoundException("Customer by id=%d not found".formatted(id)));
-//
-//        Course course = courseRepository.findById(customerRequest.getCourseId())
-//                .orElseThrow(() -> new NotFoundException("Course by id=%d not found".formatted(customerRequest.getCourseId())));
-//
-//        Customer customer = customerMapper.requestToEntity(customerRequest);
-//        customer.setId(id);
-//        customer.setCourse(course);
-//        customer.setActive(ACTIVE.value);
-//        return customerMapper.entityToResponse(customerRepository.save(customer));
-//    }
-//
-//    @Override
-//    public void deleteCustomer(Long id) {
-//        Customer customer = customerRepository.findById(id)
-//                .orElseThrow(() -> new NotFoundException("Customer by id=%d not found".formatted(id)));
-//        customer.setActive(DEACTIVE.value);
-//    }
-//
-//    @Override
-//    public List<CustomerResponse> getCustomerByName(String name) {
-//        List<Customer> customerList = customerRepository.findByNameAndActive(name, ACTIVE.value);
-//
-//        if (customerList.isEmpty()) throw new NotFoundException("Customer by name=%s not found".formatted(name));
-//
-//        return customerList.stream().map(customerMapper::entityToResponse).toList();
-//    }
 }
