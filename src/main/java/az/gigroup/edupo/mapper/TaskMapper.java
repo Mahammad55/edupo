@@ -1,20 +1,10 @@
 package az.gigroup.edupo.mapper;
 
-import az.gigroup.edupo.dto.request.CustomerRequest;
 import az.gigroup.edupo.dto.request.TaskRequest;
-import az.gigroup.edupo.dto.response.CustomerResponse;
 import az.gigroup.edupo.dto.response.TaskResponse;
-import az.gigroup.edupo.entity.Course;
-import az.gigroup.edupo.entity.Customer;
 import az.gigroup.edupo.entity.Task;
-import az.gigroup.edupo.enums.NextStep;
-import az.gigroup.edupo.enums.Stages;
-import az.gigroup.edupo.enums.TaskStatus;
 import az.gigroup.edupo.enums.TaskType;
 import org.mapstruct.*;
-
-import static az.gigroup.edupo.enums.NextStep.FOLLOW_UP;
-import static az.gigroup.edupo.enums.NextStep.RETARGET_LATER;
 
 @Mapper(componentModel = "spring")
 public interface TaskMapper {

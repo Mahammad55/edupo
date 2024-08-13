@@ -1,6 +1,6 @@
 package az.gigroup.edupo.enums;
 
-public enum Stages {
+public enum Stage {
     LEAD,
     CONTACTED,
     QUALIFIED,

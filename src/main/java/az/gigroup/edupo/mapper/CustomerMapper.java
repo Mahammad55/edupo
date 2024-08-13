@@ -4,7 +4,7 @@ import az.gigroup.edupo.dto.request.CustomerRequest;
 import az.gigroup.edupo.dto.response.CustomerResponse;
 import az.gigroup.edupo.entity.Customer;
 import az.gigroup.edupo.enums.NextStep;
-import az.gigroup.edupo.enums.Stages;
+import az.gigroup.edupo.enums.Stage;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
@@ -17,14 +17,14 @@ public interface CustomerMapper {
     Customer requestToEntity(CustomerRequest customerRequest);
 
     @Mapping(target = "price", source = "course.price")
-    @Mapping(target = "nextStep", source = "stages", qualifiedByName = "setNextStep")
-    @Mapping(target = "probability", source = "stages", qualifiedByName = "setProbability")
+    @Mapping(target = "nextStep", source = "stage", qualifiedByName = "setNextStep")
+    @Mapping(target = "probability", source = "stage", qualifiedByName = "setProbability")
     @Mapping(target = "course", source = "course.courseName")
     CustomerResponse entityToResponse(Customer customer);
 
     @Named("setProbability")
-    default long setProbability(Stages stages) {
-        return switch (stages) {
+    default long setProbability(Stage stage) {
+        return switch (stage) {
             case LOST -> 0;
             case LEAD -> 10;
             case CONTACTED -> 30;
@@ -35,8 +35,8 @@ public interface CustomerMapper {
     }
 
     @Named("setNextStep")
-    default NextStep setNextStep(Stages stages) {
-        return switch (stages) {
+    default NextStep setNextStep(Stage stage) {
+        return switch (stage) {
             case LEAD, CONTACTED, QUALIFIED -> FOLLOW_UP;
             case POSTPONED -> RETARGET_LATER;
             default -> null;

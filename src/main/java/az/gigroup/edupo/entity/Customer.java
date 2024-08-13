@@ -1,7 +1,7 @@
 package az.gigroup.edupo.entity;
 
 import az.gigroup.edupo.enums.GenderType;
-import az.gigroup.edupo.enums.Stages;
+import az.gigroup.edupo.enums.Stage;
 import az.gigroup.edupo.enums.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -35,7 +35,7 @@ public class Customer {
     private Status status;
 
     @Enumerated(EnumType.STRING)
-    private Stages stages;
+    private Stage stage;
 
     @ManyToOne
     private Course course;

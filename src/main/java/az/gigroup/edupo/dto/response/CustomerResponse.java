@@ -2,7 +2,7 @@ package az.gigroup.edupo.dto.response;
 
 import az.gigroup.edupo.enums.GenderType;
 import az.gigroup.edupo.enums.NextStep;
-import az.gigroup.edupo.enums.Stages;
+import az.gigroup.edupo.enums.Stage;
 import az.gigroup.edupo.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,7 +16,7 @@ public class CustomerResponse {
 
     private String name;
 
-    private Stages stages;
+    private Stage stage;
 
     private String mobileNumber;
 

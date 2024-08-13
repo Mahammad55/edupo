@@ -1,10 +1,15 @@
 package az.gigroup.edupo.controller;
 
+import az.gigroup.edupo.dto.criteria.CustomerSearchCriteria;
 import az.gigroup.edupo.dto.request.CustomerRequest;
 import az.gigroup.edupo.dto.response.CustomerResponse;
 import az.gigroup.edupo.service.CustomerService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +31,8 @@ public class CustomerController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CustomerResponse>> getAllCustomer() {
-        return ResponseEntity.ok(customerService.getAllCustomer());
+    public ResponseEntity<Page<CustomerResponse>> getAllCustomer(@PageableDefault(sort = "id") Pageable pageable, CustomerSearchCriteria criteria) {
+        return ResponseEntity.ok(new PageImpl<>(customerService.getAllCustomer(pageable,criteria)));
     }
 
     @GetMapping("/{id}")

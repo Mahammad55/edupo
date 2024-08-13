@@ -2,7 +2,7 @@ package az.gigroup.edupo.dto.request;
 
 import az.gigroup.edupo.annotation.ValidPhoneNumber;
 import az.gigroup.edupo.enums.GenderType;
-import az.gigroup.edupo.enums.Stages;
+import az.gigroup.edupo.enums.Stage;
 import az.gigroup.edupo.enums.Status;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class CustomerRequest {
     private String name;
 
-    private Stages stages;
+    private Stage stage;
 
     @ValidPhoneNumber
     private String mobileNumber;

@@ -1,5 +1,6 @@
 package az.gigroup.edupo.service.impl;
 
+import az.gigroup.edupo.dto.criteria.CustomerSearchCriteria;
 import az.gigroup.edupo.dto.request.CustomerRequest;
 import az.gigroup.edupo.dto.response.CustomerResponse;
 import az.gigroup.edupo.entity.Course;
@@ -10,7 +11,10 @@ import az.gigroup.edupo.mapper.CustomerMapper;
 import az.gigroup.edupo.repository.CourseRepository;
 import az.gigroup.edupo.repository.CustomerRepository;
 import az.gigroup.edupo.service.CustomerService;
+import az.gigroup.edupo.service.specification.CustomerSpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,8 +46,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<CustomerResponse> getAllCustomer() {
-        return customerRepository.findAllByActive(ACTIVE.value).stream()
+    public List<CustomerResponse> getAllCustomer(Pageable pageable, CustomerSearchCriteria criteria) {
+        Specification<Customer> specification = Specification
+                .where(new CustomerSpecification(criteria))
+                .and(((root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("active"), ACTIVE.value)));
+
+        return customerRepository.findAll(specification, pageable).stream()
                 .map(customerMapper::entityToResponse)
                 .toList();
     }
